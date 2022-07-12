@@ -1,14 +1,13 @@
+<!DOCTYPE html>
 <html lang="pt">
 <!-------------------------------------------------------------------------------
-Oficina Desenvolvimento Web
-PUCPR
-
-INDEX.PHP
-
-Profa. Cristina V. P. B. Souza
-Agosto/2022
-*** Para o correto funcionamento do CSS, o equipamento precisa de internet ***
+    Desenvolvimento Web
+    PUCPR
+    Profa. Cristina V. P. B. Souza
+    Agosto/2022
 ---------------------------------------------------------------------------------->
+<!-- turma.php --> 
+
 <html>
 	<head>	
 		<title>IE - Instituição de Ensino</title>
@@ -31,19 +30,12 @@ Agosto/2022
 
 				<img src="imagens/turma.png" class="w3-image w3-round-xxlarge" width="70%">
 
-				<footer class="w3-panel w3-padding w3-card-4 w3-light-grey w3-center w3-opacity">
-					<p>
-						<nav>
-							<a class="w3-btn w3-theme w3-hover-white"
-							   onclick="document.getElementById('id01').style.display='block'">Sobre</a>
-						</nav>
-					</p>
-				</footer>
+				<?php require 'geral/sobre.php';?>
 
-		<!-- FIM PRINCIPAL -->
+			<!-- FIM PRINCIPAL -->
 			</div>
-
-		<!-- Inclui RODAPE.PHP  -->
-		<?php require 'rodape.php';?>
+			<!-- Inclui RODAPE.PHP  -->
+			<?php require 'geral/rodape.php';?>
+			
 	</body>
 </html>

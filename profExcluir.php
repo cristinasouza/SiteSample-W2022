@@ -47,7 +47,7 @@
 
 				// Verifica conexão
 				if (!$conn) {
-					die("Connection failed: " . mysqli_connect_error());
+					die("<strong> Falha de conexão: </strong>" . mysqli_connect_error());
 				}
 				// Configura para trabalhar com caracteres acentuados do português
 				mysqli_query($conn,"SET NAMES 'utf8'");

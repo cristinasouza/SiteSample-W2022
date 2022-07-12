@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<!--
-Desenvolvimento Web
-PUCPR
-Profa. Cristina V. P. B. Souza
-Agosto/2022
--->
--->
+<!-------------------------------------------------------------------------------
+    Desenvolvimento Web
+    PUCPR
+    Profa. Cristina V. P. B. Souza
+    Agosto/2022
+---------------------------------------------------------------------------------->
+<!-- turmaExcluir_exe.php --> 
+
 <html>
 	<head>
 
@@ -24,8 +25,6 @@ Agosto/2022
 <div class="w3-main w3-container" style="margin-left:270px;margin-top:117px;">
 
 <div class="w3-panel w3-padding-large w3-card-4 w3-light-grey">
-  <h1 class="w3-xxlarge">Exclusão de Turma</h1>
-
   <p class="w3-large">
   <div class="w3-code cssHigh notranslate">
   <!-- Acesso em:-->
@@ -38,6 +37,9 @@ Agosto/2022
 	echo $data;
 	echo "</p> "
 	?>
+	<div class="w3-container w3-theme">
+	<h2>Exclusão de Turma</h2>
+	</div>
 
 	<!-- Acesso ao BD-->
 	<?php
@@ -49,7 +51,7 @@ Agosto/2022
 
 		// Verifica conexão
 		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
+			die("<strong> Falha de conexão: </strong>" . mysqli_connect_error());
 		}
 		// Configura para trabalhar com caracteres acentuados do português
 			mysqli_query($conn,"SET NAMES 'utf8'");
@@ -58,13 +60,14 @@ Agosto/2022
 			mysqli_query($conn,'SET character_set_results=utf8');
 
 		// Faz Select na Base de Dados
-		$sql = "DELETE FROM turma WHERE codTurma = $id";
+		$sql = "DELETE FROM TB_turma WHERE ID_Turma = $id";
 
 		echo "<div class='w3-responsive w3-card-4'>";
+
 		if ($result = mysqli_query($conn, $sql)) {
-				echo "Um registro excluído!";
+			echo "<p>&nbsp;Registro alterado com sucesso! </p>";
 		} else {
-			echo "Erro executando DELETE: " . mysqli_error($conn);
+			echo "<p>&nbsp;Erro executando UPDATE: " . mysqli_error($conn) . "</p>";
 		}
         echo "</div>";
 		mysqli_close($conn);  //Encerra conexao com o BD
@@ -73,16 +76,12 @@ Agosto/2022
   </div>
 </div>
 
+	<?php require 'geral/sobre.php';?>
 
-<footer class="w3-panel w3-padding w3-card-4 w3-light-grey w3-center w3-opacity">
-  <p><nav>
-      <a class="w3-btn w3-theme w3-hover-white" onclick="document.getElementById('id01').style.display='block'" >Sobre</a>
-  </nav></p>
-</footer>
-
-<!-- FIM PRINCIPAL -->
-</div>
-<!-- Inclui RODAPE.PHP  -->
-<?php require 'rodape.php';?>
+	<!-- FIM PRINCIPAL -->
+	</div>
+	<!-- Inclui RODAPE.PHP  -->
+	<?php require 'geral/rodape.php';?>
+	
 </body>
 </html>

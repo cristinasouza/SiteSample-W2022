@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<!--
-Desenvolvimento Web
-PUCPR
-Profa. Cristina V. P. B. Souza
-Agosto/2022
--->
+<!-------------------------------------------------------------------------------
+    Desenvolvimento Web
+    PUCPR
+    Profa. Cristina V. P. B. Souza
+    Agosto/2022
+---------------------------------------------------------------------------------->
+<!-- turmaExcluir.php --> 
+
 <html>
 <head>
 
@@ -23,8 +25,6 @@ Agosto/2022
 <div class="w3-main w3-container" style="margin-left:270px;margin-top:117px;">
 
     <div class="w3-panel w3-padding-large w3-card-4 w3-light-grey">
-        <h1 class="w3-xxlarge">Exclusão de Turma</h1>
-
         <p class="w3-large">
             <div class="w3-code cssHigh notranslate">
                 <!-- Acesso em:-->
@@ -47,7 +47,7 @@ Agosto/2022
 
 				// Verifica conexão
 				if (!$conn) {
-					die("Connection failed: " . mysqli_connect_error());
+					die("<strong> Falha de conexão: </strong>" . mysqli_connect_error());
 				}
 				// Configura para trabalhar com caracteres acentuados do português
 				mysqli_query($conn,"SET NAMES 'utf8'");
@@ -56,7 +56,7 @@ Agosto/2022
 				mysqli_query($conn,'SET character_set_results=utf8');
 				
 				// Faz Select na Base de Dados
-				$sql = "SELECT t.codTurma, p.nome, d.nomeDisc, t.ano, t.semestre FROM Turma as t, Disciplina as d, Professor as P WHERE t.codDisc = d.codDisciplina AND t.codProfessor = p.codProfessor AND codTurma = $id";
+				$sql = "SELECT t.ID_Turma, p.nome, d.nomeDisc, t.ano, t.semestre FROM TB_Turma as t, TB_Disciplina as d, TB_Usuario as P WHERE t.ID_Disciplina = d.ID_Disciplina AND t.ID_Usuario = p.ID_Usuario AND ID_Turma = $id";
 				echo "<div class='w3-responsive w3-card-4'>"; //Inicio form
 				 if ($result = mysqli_query($conn, $sql)) {
 						if (mysqli_num_rows($result) > 0) {
@@ -64,18 +64,18 @@ Agosto/2022
 							while ($row = mysqli_fetch_assoc($result)) {
 				?>
 								<div class="w3-container w3-theme">
-									<h2>Exclusão da Turma = [<?php echo $row['codTurma']; ?>]</h2>
+									<h2>Exclusão da Turma = [<?php echo $row['ID_Turma']; ?>]</h2>
 								</div>
 								<form class="w3-container" action="turmaExcluir_exe.php" method="post" onsubmit="return check(this.form)">
-									<input type="hidden" id="Id" name="Id" value="<?php echo $row['codTurma']; ?>">
+									<input type="hidden" id="Id" name="Id" value="<?php echo $row['ID_Turma']; ?>">
 									<p>
-									<label class="w3-text-deep-purple"><b>Professor: </b> <?php echo $row['nome']; ?> </label></p>
+									<label class="w3-text-IE"><b>Professor: </b> <?php echo $row['nome']; ?> </label></p>
 									<p>
-									<label class="w3-text-deep-purple"><b>Disciplina: </b><?php echo $row['nomeDisc']; ?></label></p>
+									<label class="w3-text-IE"><b>Disciplina: </b><?php echo $row['nomeDisc']; ?></label></p>
 									<p>
-									<label class="w3-text-deep-purple"><b>Ano: </b><?php echo $row['ano']; ?></label></p>
+									<label class="w3-text-IE"><b>Ano: </b><?php echo $row['ano']; ?></label></p>
 									<p>
-									<label class="w3-text-deep-purple"><b>Semestre: </b><?php echo $row['semestre']; ?></label></p>
+									<label class="w3-text-IE"><b>Semestre: </b><?php echo $row['semestre']; ?></label></p>
 									<p>
 									<input type="submit" value="Confirma exclusão?" class="w3-btn w3-red" >
 									<input type="button" value="Cancelar" class="w3-btn w3-theme" onclick="window.location.href='discListar.php'"></p>
@@ -96,19 +96,12 @@ Agosto/2022
 		</p>
 	</div>
 
+	<?php require 'geral/sobre.php';?>
 
-	<footer class="w3-panel w3-padding w3-card-4 w3-light-grey w3-center w3-opacity">
-    <p>
-        <nav>
-            <a class="w3-btn w3-theme w3-hover-white"
-               onclick="document.getElementById('id01').style.display='block'">Sobre</a>
-        </nav>
-    </p>
-	</footer>
+	<!-- FIM PRINCIPAL -->
+	</div>
+	<!-- Inclui RODAPE.PHP  -->
+	<?php require 'geral/rodape.php';?>
 
-<!-- FIM PRINCIPAL -->
-</div>
-<!-- Inclui RODAPE.PHP  -->
-<?php require 'rodape.php';?>
 </body>
 </html>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<!--
-Desenvolvimento Web
-PUCPR
-Profa. Cristina V. P. B. Souza
-Agosto/2022
--->
+<!-------------------------------------------------------------------------------
+    Desenvolvimento Web
+    PUCPR
+    Profa. Cristina V. P. B. Souza
+    Agosto/2022
+---------------------------------------------------------------------------------->
+<!-- turmaincluir.php --> 
+
 <html>
 <head>
 
@@ -44,7 +46,7 @@ Agosto/2022
 
 				// Verifica conexão
 				if (!$conn) {
-					die("Connection failed: " . mysqli_connect_error());
+					die("<strong> Falha de conexão: </strong>" . mysqli_connect_error());
 				}
 				// Configura para trabalhar com caracteres acentuados do português
 				mysqli_query($conn,"SET NAMES 'utf8'");
@@ -124,20 +126,12 @@ Agosto/2022
 		</p>
 	</div>
 
+	<?php require 'geral/sobre.php';?>
 
-	<footer class="w3-panel w3-padding w3-card-4 w3-light-grey w3-center w3-opacity">
-    <p>
-        <nav>
-            <a class="w3-btn w3-theme w3-hover-white"
-               onclick="document.getElementById('id01').style.display='block'">Sobre</a>
-        </nav>
-    </p>
-	</footer>
+	<!-- FIM PRINCIPAL -->
+	</div>
+	<!-- Inclui RODAPE.PHP  -->
+	<?php require 'geral/rodape.php';?>
 
-<!-- FIM PRINCIPAL -->
-</div>
-
-<!-- Inclui RODAPE.PHP  -->
-<?php require 'rodape.php';?>
 </body>
 </html>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<!--
-Desenvolvimento Web
-PUCPR
-Profa. Cristina V. P. B. Souza
-Agosto/2022
--->
-<html>
+<!-------------------------------------------------------------------------------
+    Desenvolvimento Web
+    PUCPR
+    Profa. Cristina V. P. B. Souza
+    Agosto/2022
+---------------------------------------------------------------------------------->
+<!-- discAtualizar_exe.php --> 
 
+<html>
 <head>
 
 	<title>IE - Instituição de Ensino</title>
@@ -85,18 +86,12 @@ Agosto/2022
 		</div>
 
 
-		<footer class="w3-panel w3-padding w3-card-4 w3-light-grey w3-center w3-opacity">
-			<p>
-			<nav>
-				<a class="w3-btn w3-theme w3-hover-white" onclick="document.getElementById('id01').style.display='block'">Sobre</a>
-			</nav>
-			</p>
-		</footer>
-
-		<!-- FIM PRINCIPAL -->
+	<?php require 'geral/sobre.php';?>
+	<!-- FIM PRINCIPAL -->
 	</div>
 	<!-- Inclui RODAPE.PHP  -->
-	<?php require 'rodape.php'; ?>
+	<?php require 'geral/rodape.php';?>
+
 </body>
 
 </html>

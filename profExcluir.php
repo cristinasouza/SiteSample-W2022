@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-    <!--
-     Desenvolvimento Web
-     PUCPR
-     Profa. Cristina V. P. B. Souza
-     Agosto/2022
-    -->
+<!-------------------------------------------------------------------------------
+    Desenvolvimento Web
+    PUCPR
+    Profa. Cristina V. P. B. Souza
+    Agosto/2022
+---------------------------------------------------------------------------------->
+<!-- profExcluir.php -->
+
 <html>
 <head>
 
@@ -15,6 +17,7 @@
 	<link rel="stylesheet" href="css/customize.css">
 </head>
 <body onload="w3_show_nav('menuProf')">
+
 <!-- Inclui MENU.PHP  -->
 <?php require 'menu.php';?>
 <?php require 'bd/conectaBD.php'; ?>
@@ -99,19 +102,12 @@
 			</div>
 		</p>
 	</div>
+	
+	<?php require 'geral/sobre.php';?>
+	<!-- FIM PRINCIPAL -->
+	</div>
+	<!-- Inclui RODAPE.PHP  -->
+	<?php require 'geral/rodape.php';?>
 
-
-	<footer class="w3-panel w3-padding w3-card-4 w3-light-grey w3-center w3-opacity">
-    <p>
-        <nav>
-            <a class="w3-button w3-theme w3-hover-white"
-               onclick="document.getElementById('id01').style.display='block'">Sobre</a>
-        </nav>
-    </p>
-	</footer>
-<!-- FIM PRINCIPAL -->
-</div>
-<!-- Inclui RODAPE.PHP  -->
-<?php require 'rodape.php';?>
 </body>
 </html>

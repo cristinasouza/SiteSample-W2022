@@ -28,7 +28,7 @@
 			<div class="w3-panel w3-padding-large w3-card-4 w3-light-grey">
 				<h1 class="w3-jumbo">Controle Acadêmico: Disciplinas</h1>
 
-				<img src="imagens/disciplina.png" class="w3-image w3-round-xxlarge" width="70%">
+				<img src="imagens/disciplina.png" class="w3-image w3-round-xxlarge" width="70%" style="max-width:500px">
 
 				<?php require 'geral/sobre.php';?>
 				<!-- FIM PRINCIPAL -->

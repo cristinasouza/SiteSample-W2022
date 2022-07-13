@@ -19,7 +19,7 @@
 	<body  onload="w3_show_nav('menuDisc')">
 
 		<!-- Inclui MENU.PHP  -->
-		<?php require 'menu.php'; ?>
+		<?php require 'geral/menu.php'; ?>
 
 
 		<!-- Conteúdo PRINCIPAL: deslocado para direita em 270 pixels quando a sidebar é visível -->

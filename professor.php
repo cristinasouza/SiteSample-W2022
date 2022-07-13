@@ -18,8 +18,7 @@
 	<body  onload="w3_show_nav('menuProf')">
 
 		<!-- Inclui MENU.PHP  -->
-		<?php require 'menu.php'; ?>
-
+		<?php require 'geral/menu.php'; ?>
 
 		<!-- Conteúdo PRINCIPAL: deslocado para direita em 270 pixels quando a sidebar é visível -->
 		<div class="w3-main w3-container" style="margin-left:270px;margin-top:117px;">

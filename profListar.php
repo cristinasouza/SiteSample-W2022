@@ -17,15 +17,13 @@
 </head>
 <body  onload="w3_show_nav('menuProf')">
 <!-- Inclui MENU.PHP  -->
-<?php require 'menu.php'; ?>
+<?php require 'geral/menu.php'; ?>
 <?php require 'bd/conectaBD.php'; ?>
 
 <!-- Conteúdo Principal: deslocado para direita em 270 pixels quando a sidebar é visível -->
 <div class="w3-main w3-container" style="margin-left:270px;margin-top:117px;">
 
     <div class="w3-panel w3-padding-large w3-card-4 w3-light-grey">
-        <!-- h1 class="w3-xxlarge">Relação de Professores</h1 -->
-
         <p class="w3-large">
         <p>
         <div class="w3-code cssHigh notranslate">

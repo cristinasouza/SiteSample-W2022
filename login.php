@@ -10,7 +10,7 @@
 <body>
 
 <?php
-
+    session_start(); // infomra ao PHP que iremos trabalhar com sessão
     require 'bd/conectaBD.php'; 
 
     date_default_timezone_set("America/Sao_Paulo");
@@ -25,8 +25,7 @@
 
     // Verifica conexão
     if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-        exit();
+        die("<strong> Falha de conexão: </strong>" . mysqli_connect_error());
     }
 
     $usuario = mysqli_real_escape_string($conn, $_POST['Login']);
@@ -39,27 +38,20 @@
     mysqli_query($conn,'SET character_set_results=utf8');
 
     // Faz Select na Base de Dados
-    $sql = "SELECT nome, ID_TipoUsu FROM TB_Usuario WHERE login = '$usuario' AND senha = md5('$senha')";
-
-    echo $sql;
-    echo"<br>";
+    $sql = "SELECT nome, foto, t.nomeTipo FROM TB_Usuario as U, TB_TipoUsuario as T WHERE u.ID_TipoUsu = t.ID_TipoUsu AND login = '$usuario' AND senha = md5('$senha')";
 
     if ($result = mysqli_query($conn, $sql)) {
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
-            $_SESSION ['login'] = $usuario;
-            $tipoUsu = $row['ID_TipoUsu'];
-            $nome    = $row['nome'];
-            $_SESSION ['tipo']  = $tipoUsu;
-            $_SESSION ['nome']  = $nome;
-
-            echo $tipoUsu;
-            echo $nome;
-            echo "";
-
+            $_SESSION ['login']       = $usuario;
+            $_SESSION ['nomeTipoUsu'] = $row['nomeTipo'];
+            $_SESSION ['nome']        = $row['nome'];
+            $_SESSION ['foto']        = $row['foto'];
+            unset($_SESSION['nao_autenticado']);
             header('location: professor.php');
             exit();
         }else{
+            $_SESSION ['nao_autenticado'] = true;
             header('location: index.php');
             exit();
         }

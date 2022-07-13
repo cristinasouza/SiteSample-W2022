@@ -40,7 +40,7 @@ function mostrarOcultarSenha() {
 // Script para validar confirmação de senha Ok
 function validarSenha() {
   var senha  = document.getElementById("Senha");
-  var senha2 = document.getElementById('Senha2');
+  var senha2 = document.getElementById("Senha2");
 
   if (senha.value != senha2.value) {
     senha2.setCustomValidity("Senhas diferentes!");
@@ -59,6 +59,10 @@ function w3_anonymous(){
   w3_show_none()
   w3_open("LoginCadastro");
 
+}
+
+function LF_open() {  // Aviso: Login Fail Modal
+  document.getElementById("LF").style.display = "block";
 }
 
 function w3_open() {

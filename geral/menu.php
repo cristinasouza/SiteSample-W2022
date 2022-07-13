@@ -7,14 +7,20 @@ MENU.PHP
 Profa. Cristina V. P. B. Souza
 Agosto/2022
 ---------------------------------------------------------------------------------->
-	<!-- Top -->
 
+	<?php
+		require('verifica_login.php');
+	?>
+	<!-- Top -->
 	<div class="w3-top"   > <!--id="myOverlay" -->
 		<div class="w3-row w3-white w3-padding" >
 			<div class="w3-half" style="margin:0 0 0 0"><a href="."><img src='imagens/logo.jpg' alt=' IE Exemplo '></a>
 			</div>
 			<div class="w3-half w3-margin-top w3-wide w3-hide-medium w3-hide-small">
-				<!-- div class="w3-right">INSTITUIÇÃO DE ENSINO</div -->
+				<div class="w3-right"><?php 
+					echo $_SESSION['nomeTipoUsu'] . ":&nbsp;";
+					echo $_SESSION['nome']; 
+					?>&nbsp;<a href="logout.php">Sair</a></div >
 			</div>
 		</div>
 		<div class="w3-bar w3-theme w3-large" style="z-index:-1">

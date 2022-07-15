@@ -10,15 +10,15 @@
 <html>
 <head>
 <title>IE - Instituição de Ensino</title>
-<link rel="icon" type="image/png" href="imagens/IE_favicon.png"/>
+<link rel="icon" type="image/png" href="../imagens/IE_favicon.png"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="css/customize.css">
+<link rel="stylesheet" href="../css/customize.css">
 </head>
-<body onload="w3_show_nav('menuTurma')">
+<body>
 <!-- Inclui MENU.PHP  -->
-<?php require 'geral/menu.php'; ?>
-<?php require 'bd/conectaBD.php'; ?>
+<?php require '../geral/menuPerfilProf.php'; ?>
+<?php require '../bd/conectaBD.php'; ?>
 
 <!-- Conteúdo Principal: deslocado para direita em 270 pixels quando a sidebar é visível -->
 <div class="w3-main w3-container" style="margin-left:270px;margin-top:117px;">
@@ -44,6 +44,8 @@
             <!-- Acesso ao BD-->
             <?php
 
+            $id = $_SESSION['ID_Usuario'];
+
             // Cria conexão
             $conn = mysqli_connect($servername, $username, $password, $database);
 
@@ -58,18 +60,16 @@
 			mysqli_query($conn,'SET character_set_results=utf8');
 
             // Faz Select na Base de Dados
-            $sql = "SELECT t.ID_Turma, p.nome, d.nomeDisc, t.ano, t.semestre FROM TB_Turma as t, TB_Disciplina as d, TB_Usuario as P WHERE t.ID_Disciplina = d.ID_Disciplina AND t.ID_Usuario = p.ID_Usuario ORDER BY p.nome, t.ano, t.semestre, d.nomeDisc";
+            $sql = "SELECT t.ID_Turma, p.nome, d.nomeDisc, t.ano, t.semestre FROM TB_Turma as t, TB_Disciplina as d, TB_Usuario as P WHERE p.ID_Usuario = $id AND t.ID_Disciplina = d.ID_Disciplina AND t.ID_Usuario = p.ID_Usuario ORDER BY  t.ano, t.semestre, d.nomeDisc";
             echo "<div class='w3-responsive w3-card-4'>";
             if ($result = mysqli_query($conn, $sql)) {
                 echo "<table class='w3-table-all'>";
                 echo "	<tr>";
                 echo "	  <th>Turma</th>";
                 echo "	  <th>Professor</th>";
-				echo "	  <th>Disciplina</th>";
 				echo "	  <th>Ano</th>";
 				echo "	  <th>Semestre</th>";
-				echo "	  <th> </th>";
-				echo "	  <th> </th>";
+                echo "	  <th>Disciplina</th>";
                 echo "	</tr>";
                 if (mysqli_num_rows($result) > 0) {
                     // Apresenta cada linha da tabela
@@ -80,20 +80,16 @@
                         echo $cod;
 						echo "</td><td>";
                         echo $row["nome"];
-                        echo "</td><td>";
-                        echo $row["nomeDisc"];
-						echo "</td><td>";	
+                        echo "</td><td>";                        	
                         echo $row["ano"];
 						echo "</td><td>";
                         echo $row["semestre"];
                         echo "</td><td>";
+                        echo $row["nomeDisc"];
+						echo "</td>";
 
 						//Atualizar e Excluir registro de prof
 				?>
-                        <a href='turmaAtualizar.php?id=<?php echo $cod; ?>'><img src='imagens/Edit.png' title='Editar Turma' width='32'></a>
-                        </td><td>
-                        <a href='turmaExcluir.php?id=<?php echo $cod; ?>'><img src='imagens/Delete.png' title='Excluir Turma' width='32'></a>
-                        </td>
                         </tr>
 				 <?php
                     }
@@ -110,12 +106,12 @@
         </div>
     </div>
 
-    <?php require 'geral/sobre.php';?>
+    <?php require '../geral/sobre.php';?>
 
     <!-- FIM PRINCIPAL -->
     </div>
     <!-- Inclui RODAPE.PHP  -->
-    <?php require 'geral/rodape.php';?>
+    <?php require '../geral/rodape.php';?>
 
 </body>
 </html>

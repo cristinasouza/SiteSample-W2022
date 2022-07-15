@@ -12,7 +12,7 @@
 <?php
     session_start(); // infomra ao PHP que iremos trabalhar com sessão
     require 'bd/conectaBD.php'; 
-
+    
     date_default_timezone_set("America/Sao_Paulo");
     $data = date("d/m/Y H:i:s",time());
     echo "<p class='w3-small' > ";
@@ -38,18 +38,31 @@
     mysqli_query($conn,'SET character_set_results=utf8');
 
     // Faz Select na Base de Dados
-    $sql = "SELECT nome, foto, t.nomeTipo FROM TB_Usuario as U, TB_TipoUsuario as T WHERE u.ID_TipoUsu = t.ID_TipoUsu AND login = '$usuario' AND senha = md5('$senha')";
+    $sql = "SELECT ID_Usuario,nome, foto, t.nomeTipo FROM TB_Usuario as U, TB_TipoUsuario as T WHERE u.ID_TipoUsu = t.ID_TipoUsu AND login = '$usuario' AND senha = md5('$senha')";
+    $url = dirname($_SERVER['SCRIPT_NAME']);                   // Obtém URL básica da aplicação Web
+    $url = substr($url,strrpos($url,"\\/")+1,strlen($url));    // Retira 1o. '/'
+    if (substr_count($url, '/') >= 1){                          
+        $url = substr($url,strrpos($url,"\\/"),strlen($url));  // Retira 2o. '/', se ainda houver esse caracter
+        $url = strstr($url, '/',true);
+    }
+    $_SESSION ['myHomeURL']        = $url;
 
     if ($result = mysqli_query($conn, $sql)) {
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
             $_SESSION ['login']       = $usuario;
             $_SESSION ['nomeTipoUsu'] = $row['nomeTipo'];
+            $_SESSION ['ID_Usuario']  = $row['ID_Usuario'];
             $_SESSION ['nome']        = $row['nome'];
             $_SESSION ['foto']        = $row['foto'];
             unset($_SESSION['nao_autenticado']);
-            header('location: professor.php');
-            exit();
+            if( $_SESSION ['nomeTipoUsu'] == 'Administrador'){
+                header('location: /'. $url . '/professor.php');
+                exit();
+            }else {
+                header('location: /'. $url . '/professor/perfilProf.php');
+                exit();
+            }
         }else{
             $_SESSION ['nao_autenticado'] = true;
             header('location: index.php');

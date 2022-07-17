@@ -60,12 +60,12 @@
 			mysqli_query($conn,'SET character_set_results=utf8');
 
 		// Faz Select na Base de Dados
-		$sql = "DELETE FROM TB_turma WHERE ID_	Turma = $id";
+		$sql = "DELETE FROM TB_turma WHERE ID_Turma = $id";
 
 		echo "<div class='w3-responsive w3-card-4'>";
 
 		if ($result = mysqli_query($conn, $sql)) {
-			echo "<p>&nbsp;Registro alterado com sucesso! </p>";
+			echo "<p>&nbsp;Registro excluído com sucesso! </p>";
 		} else {
 			echo "<p>&nbsp;Erro executando UPDATE: " . mysqli_error($conn) . "</p>";
 		}

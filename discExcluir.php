@@ -59,26 +59,29 @@
 				$sql = "SELECT ID_Disciplina, NomeDisc, Ementa FROM TB_Disciplina WHERE ID_Disciplina = $id";
 				echo "<div class='w3-responsive w3-card-4'>"; //Inicio form
 				 if ($result = mysqli_query($conn, $sql)) {
-						if (mysqli_num_rows($result) > 0) {
-						// Apresenta cada linha da tabela
-							while ($row = mysqli_fetch_assoc($result)) {
-				?>
-								<div class="w3-container w3-theme">
-									<h2>Exclusão do Disciplina Cód. = [<?php echo $row['ID_Disciplina']; ?>]</h2>
-								</div>
-								<form class="w3-container" action="discExcluir_exe.php" method="post" onsubmit="return check(this.form)">
-									<input type="hidden" id="Id" name="Id" value="<?php echo $row['ID_Disciplina']; ?>">
-									<p>
-									<label class="w3-text-IE"><b>Nome: </b> <?php echo $row['NomeDisc']; ?> </label></p>
-									<p>
-									<label class="w3-text-IE"><b>Ementa: </b><?php echo $row['Ementa']; ?></label></p>
-									<p>
-									<input type="submit" value="Confirma exclusão?" class="w3-btn w3-red" >
-									<input type="button" value="Cancelar" class="w3-btn w3-theme" onclick="window.location.href='discListar.php'"></p>
-								</form>
-			<?php 
-							}
-						}
+					if (mysqli_num_rows($result) == 1) {
+						$row = mysqli_fetch_assoc($result);
+					?>
+						<div class="w3-container w3-theme">
+							<h2>Exclusão do Disciplina Cód. = [<?php echo $row['ID_Disciplina']; ?>]</h2>
+						</div>
+						<form class="w3-container" action="discExcluir_exe.php" method="post" onsubmit="return check(this.form)">
+							<input type="hidden" id="Id" name="Id" value="<?php echo $row['ID_Disciplina']; ?>">
+							<p>
+							<label class="w3-text-IE"><b>Nome: </b> <?php echo $row['NomeDisc']; ?> </label></p>
+							<p>
+							<label class="w3-text-IE"><b>Ementa: </b><?php echo $row['Ementa']; ?></label></p>
+							<p>
+							<input type="submit" value="Confirma exclusão?" class="w3-btn w3-red" >
+							<input type="button" value="Cancelar" class="w3-btn w3-theme" onclick="window.location.href='discListar.php'"></p>
+						</form>
+					<?php 
+					}else{?>
+						<div class="w3-container w3-theme">
+						<h2>Tentativa de exclusão de Disciplina inexistente</h2>
+						</div>
+						<br>
+					<?php }
 				}
 				else {
 					echo "Erro executando DELETE: " . mysqli_error($conn);

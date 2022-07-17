@@ -94,7 +94,7 @@ Agosto/2022
 		<!-- FIM PRINCIPAL -->
 	</div>
 	<!-- Inclui RODAPE.PHP  -->
-	<?php require 'rodape.php'; ?>
+	<?php require 'geral/rodape.php'; ?>
 </body>
 
 </html>

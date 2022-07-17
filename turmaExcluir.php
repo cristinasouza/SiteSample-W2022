@@ -59,33 +59,36 @@
 				$sql = "SELECT t.ID_Turma, p.nome, d.nomeDisc, t.ano, t.semestre FROM TB_Turma as t, TB_Disciplina as d, TB_Usuario as P WHERE t.ID_Disciplina = d.ID_Disciplina AND t.ID_Usuario = p.ID_Usuario AND ID_Turma = $id";
 				echo "<div class='w3-responsive w3-card-4'>"; //Inicio form
 				 if ($result = mysqli_query($conn, $sql)) {
-						if (mysqli_num_rows($result) > 0) {
-						// Apresenta cada linha da tabela
-							while ($row = mysqli_fetch_assoc($result)) {
-				?>
-								<div class="w3-container w3-theme">
-									<h2>Exclusão da Turma = [<?php echo $row['ID_Turma']; ?>]</h2>
-								</div>
-								<form class="w3-container" action="turmaExcluir_exe.php" method="post" onsubmit="return check(this.form)">
-									<input type="hidden" id="Id" name="Id" value="<?php echo $row['ID_Turma']; ?>">
-									<p>
-									<label class="w3-text-IE"><b>Professor: </b> <?php echo $row['nome']; ?> </label></p>
-									<p>
-									<label class="w3-text-IE"><b>Disciplina: </b><?php echo $row['nomeDisc']; ?></label></p>
-									<p>
-									<label class="w3-text-IE"><b>Ano: </b><?php echo $row['ano']; ?></label></p>
-									<p>
-									<label class="w3-text-IE"><b>Semestre: </b><?php echo $row['semestre']; ?></label></p>
-									<p>
-									<input type="submit" value="Confirma exclusão?" class="w3-btn w3-red" >
-									<input type="button" value="Cancelar" class="w3-btn w3-theme" onclick="window.location.href='discListar.php'"></p>
-								</form>
-			<?php 
-							}
-						}
+					if (mysqli_num_rows($result) == 1) {
+						$row = mysqli_fetch_assoc($result); 
+						?>
+						<div class="w3-container w3-theme">
+							<h2>Exclusão da Turma = [<?php echo $row['ID_Turma']; ?>]</h2>
+						</div>
+						<form class="w3-container" action="turmaExcluir_exe.php" method="post" onsubmit="return check(this.form)">
+							<input type="hidden" id="Id" name="Id" value="<?php echo $row['ID_Turma']; ?>">
+							<p>
+							<label class="w3-text-IE"><b>Professor: </b> <?php echo $row['nome']; ?> </label></p>
+							<p>
+							<label class="w3-text-IE"><b>Disciplina: </b><?php echo $row['nomeDisc']; ?></label></p>
+							<p>
+							<label class="w3-text-IE"><b>Ano: </b><?php echo $row['ano']; ?></label></p>
+							<p>
+							<label class="w3-text-IE"><b>Semestre: </b><?php echo $row['semestre']; ?></label></p>
+							<p>
+							<input type="submit" value="Confirma exclusão?" class="w3-btn w3-red" >
+							<input type="button" value="Cancelar" class="w3-btn w3-theme" onclick="window.location.href='discListar.php'"></p>
+						</form>
+						<?php 
+					}else{?>
+						<div class="w3-container w3-theme">
+						<h2>Tentativa de exclusão de Turma inexistente</h2>
+						</div>
+						<br>
+					<?php }
 				}
 				else {
-					echo "Erro executando DELETE: " . mysqli_error($conn);
+					echo "<p style='text-align:center'>Erro executando DELETE: " . mysqli_error($conn) . "</p>";
 				}
 				echo "</div>"; //Fim form
 				mysqli_close($conn);  //Encerra conexao com o BD

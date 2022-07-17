@@ -59,40 +59,43 @@
 				
 				// Faz Select na Base de Dados
 				$sql = "SELECT ID_usuario, Nome, Celular, DataNasc, Login FROM TB_Usuario WHERE ID_usuario = $id";
-				echo "<div class='w3-responsive w3-card-4'>"; //Inicio form
+				//Inicio DIV form
+				echo "<div class='w3-responsive w3-card-4'>";  
 				 if ($result = mysqli_query($conn, $sql)) {
-						if (mysqli_num_rows($result) > 0) {
-						// Apresenta cada linha da tabela
-							while ($row = mysqli_fetch_assoc($result)) {
-								$dataN = explode('-', $row["DataNasc"]);
-								$ano = $dataN[0];
-								$mes = $dataN[1];
-								$dia = $dataN[2];
-								$nova_data = $dia . '/' . $mes . '/' . $ano;
-				?>
-								<div class="w3-container w3-theme">
-									<h2>Exclusão do Professor Cód. = [<?php echo $row['ID_usuario']; ?>]</h2>
-								</div>
-								<form class="w3-container" action="ProfExcluir_exe.php" method="post" onsubmit="return check(this.form)">
-									<input type="hidden" id="Id" name="Id" value="<?php echo $row['ID_usuario']; ?>">
-									<p>
-									<label class="w3-text-IE"><b>Nome: </b> <?php echo $row['Nome']; ?> </label></p>
-									<p>
-									<label class="w3-text-IE"><b>Celular: </b><?php echo $row['Celular']; ?></label></p>
-									<p>
-									<label class="w3-text-IE"><b>Data de Nascimento: </b><?php echo $nova_data; ?></label></p>
-									<p>
-									<label class="w3-text-IE"><b>Login: </b><?php echo $row['Login']; ?></label></p>
-									<p>
-									<input type="submit" value="Confirma exclusão?" class="w3-btn w3-red" >
-									<input type="button" value="Cancelar" class="w3-btn w3-theme" onclick="window.location.href='profListar.php'"></p>
-								</form>
+					if (mysqli_num_rows($result) == 1) {
+						$row = mysqli_fetch_assoc($result);
+						$dataN = explode('-', $row["DataNasc"]);
+						$ano = $dataN[0];
+						$mes = $dataN[1];
+						$dia = $dataN[2];
+						$nova_data = $dia . '/' . $mes . '/' . $ano;
+			?>
+						<div class="w3-container w3-theme">
+							<h2>Exclusão do Professor Cód. = [<?php echo $row['ID_usuario']; ?>]</h2>
+						</div>
+						<form class="w3-container" action="ProfExcluir_exe.php" method="post" onsubmit="return check(this.form)">
+							<input type="hidden" id="Id" name="Id" value="<?php echo $row['ID_usuario']; ?>">
+							<p>
+							<label class="w3-text-IE"><b>Nome: </b> <?php echo $row['Nome']; ?> </label></p>
+							<p>
+							<label class="w3-text-IE"><b>Celular: </b><?php echo $row['Celular']; ?></label></p>
+							<p>
+							<label class="w3-text-IE"><b>Data de Nascimento: </b><?php echo $nova_data; ?></label></p>
+							<p>
+							<label class="w3-text-IE"><b>Login: </b><?php echo $row['Login']; ?></label></p>
+							<p>
+							<input type="submit" value="Confirma exclusão?" class="w3-btn w3-red" >
+							<input type="button" value="Cancelar" class="w3-btn w3-theme" onclick="window.location.href='profListar.php'"></p>
+						</form>
 			<?php 
-							}
-						}
-				}
-				else {
-					echo "Erro executando DELETE: " . mysqli_error($conn);
+					}else{?>
+						<div class="w3-container w3-theme">
+						<h2>Tentativa de exclusão de Professor inexistente</h2>
+						</div>
+						<br>
+					<?php }
+				}else {
+					echo "<p style='text-align:center'>Erro executando DELETE: " . mysqli_error($conn) . "</p>";
 				}
 				echo "</div>"; //Fim form
 				mysqli_close($conn);  //Encerra conexao com o BD

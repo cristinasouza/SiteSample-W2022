@@ -20,6 +20,23 @@
 	<body >  
         <?php
             session_start();
+            $url = dirname($_SERVER['SCRIPT_NAME']);                   // Obtém URL básica da aplicação Web
+            $url = substr($url,strrpos($url,"\\/")+1,strlen($url));    // Retira 1o. '/'
+            if (substr_count($url, '/') >= 1){                          
+                $url = substr($url,strrpos($url,"\\/"),strlen($url));  // Retira 2o. '/', se ainda houver esse caracter
+                $url = strstr($url, '/',true);
+            }
+            if (isset($_SESSION['nomeTipoUsu'])) {                              // Se existe usuário logado, verifica o tipo
+                if ($_SESSION['nomeTipoUsu'] == 'Administrador'){
+                    $url = "Location: /" . $url . "/professor.php";	            // Monta página para reurlecionamento
+                    header($url);                                         		// Vai para a página inicial de Administrador
+                    exit();
+                }else if ($_SESSION['nomeTipoUsu'] == 'Professor'){
+                    $url = "Location: /" . $url . "/professor/perfilProf.php";	// Monta página para reurlecionamento
+                    header($url);                                         		// Vai para a página inicial de Professor
+                    exit();
+                }
+            }
         ?>
         <div class="w3-top" id="LoginCadastro" >
             <div class="w3-row w3-white w3-padding" >
